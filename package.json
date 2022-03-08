@@ -1,0 +1,22 @@
+{
+  "name": "peanut-calendar",
+  "version": "1.0.0",
+  "description": "React Scratch Test Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peanut-lover/peanut-calendar.git"
+  },
+  "keywords": [
+    "calendar"
+  ],
+  "author": "peanut-lover",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/peanut-lover/peanut-calendar/issues"
+  },
+  "homepage": "https://github.com/peanut-lover/peanut-calendar#readme"
+}
