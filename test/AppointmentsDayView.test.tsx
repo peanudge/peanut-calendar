@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from "react-dom";
 import ReacTestUtils from "react-dom/test-utils";
-import { Appointment, AppointmentsDayView } from "../src/Appointment";
-import { AppointmentData } from '../src/types';
+import { Appointment, AppointmentsDayView } from "../src/AppointmentsDayView";
+import { AppointmentData, CustomerData } from '../src/types';
 
 describe("Appointment", () => {
     let container: ReactDOM.Container | null = null;
+    const today = new Date();
     beforeEach(() => {
         container = document.createElement('div');
     })
@@ -14,16 +15,39 @@ describe("Appointment", () => {
       component: React.ReactElement
     ) => ReactDOM.render(component, container);
 
-    it("renders the customer first name", () => {
-        const customer = { firstName: "Ashley" }
-        render(<Appointment customer={customer} />);
-        expect(container?.textContent).toMatch("Ashley");
+    it("renders the customer Name, PhoneNumber, Service, Notes, Stylist", () => {
+        const customer: CustomerData = {
+            firstName: "Ashley",
+            lastName: "Kim",
+            phoneNumber: "010-0000-0000"
+        }
+        
+        render(
+          <Appointment
+            customer={customer}
+            startsAt={today.setHours(13, 0)}
+            stylist={"Test Stylist"}
+            notes={"This is test notes"}
+            service={"Cleaning"}
+          />
+        );
+        expect(container?.textContent).toMatch("13:00");
+        expect(container?.textContent).toMatch("Ashley Kim");
+        expect(container?.textContent).toMatch("010-0000-0000");
+        expect(container?.textContent).toMatch("Test Stylist");
+        expect(container?.textContent).toMatch("This is test notes");
+        expect(container?.textContent).toMatch("Cleaning");
     });
 
-    it("renders another customer first name", () => {
-        const customer = { firstName: "Jordan" };
-        render(<Appointment customer={customer} />);
-        expect(container?.textContent).toMatch("Jordan");
+    it("renders another customer Name, PhoneNumber, Service, Notes", () => {
+        const customer = {
+            firstName: "Jordan",
+            lastName: "Kim",
+            phoneNumber: "010-0000-0000",
+        };
+        render(<Appointment customer={customer} startsAt={0} />);
+        expect(container?.textContent).toMatch("Jordan Kim");
+        expect(container?.textContent).toMatch("010-0000-0000");
     });
 });
  
