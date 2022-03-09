@@ -1,11 +1,29 @@
 import React from 'react';
-import { Customer } from './types/customer';
+import { CustomerData, AppointmentData, Timestamp } from './types';
 
-type Props = {
-    customer: Customer;
+const appointmentTimeOfDay = (startsAt: Timestamp) => {
+    const [h, m] = new Date(startsAt).toTimeString().split(':');
+    return `${h}:${m}`;
 }
-export const Appointment: React.FC<Props> = ({
-    customer: { firstName }
+
+type AppointmentProps = {
+  customer: CustomerData;
+};
+export const Appointment: React.FC<AppointmentProps> = ({
+  customer: { firstName },
 }) => {
-    return <div>{firstName}</div>;
-}
+  return <div>{firstName}</div>;
+};
+
+type AppointmentsDayViewProps = {
+  appointments: AppointmentData[];
+};
+export const AppointmentsDayView: React.FC<AppointmentsDayViewProps> = ({
+  appointments,
+}) => <div id="appointmentsDayView">
+        <ol>
+            {appointments.map(appointment => <li key={appointment.startsAt}>
+                {appointmentTimeOfDay(appointment.startsAt)}
+            </li>)}
+    </ol>
+</div>;
