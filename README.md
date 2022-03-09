@@ -13,3 +13,9 @@ I will start from a empty directory and begin building out our application, test
 > 2. Commit early and often
 
 recommend committing to source control after every single tests.
+
+# Using TDD Concepts
+
+- Red Green Refactor Cycle
+- Triangulation
+- `Arrange, Act, Assert`
