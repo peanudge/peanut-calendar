@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactTestUtils from "react-dom/test-utils";
 import { CustomerForm } from '../src/CustomerForm';
 import { createContainer } from './domManipulator';
 
@@ -60,4 +61,28 @@ describe("CustomerForm", () => {
         render(<CustomerForm />);
         expect(firstNameField()?.id).toEqual('firstName');
     })
+    
+    it("saves existing first name when submitted", async () => {
+        expect.hasAssertions();
+        render(<CustomerForm firstName='Ashley'
+            onSubmit={({ firstName }) => {
+            expect(firstName).toEqual("Ashley");
+            }} />);
+        await ReactTestUtils.Simulate.submit(form('customer')!);
+    })
+
+    it("saves new first name when submitted", async () => {
+        expect.hasAssertions();
+        render(
+            <CustomerForm firstName='Ashley' onSubmit={({ firstName }) => {
+                expect(firstName).toEqual('Jamie')
+            }} />
+        );
+        
+        await ReactTestUtils.Simulate.change(firstNameField()!, {
+            target: ({ value: 'Jamie' }) as HTMLInputElement
+        });
+
+        await ReactTestUtils.Simulate.submit(form('customer')!);
+    });
 });
