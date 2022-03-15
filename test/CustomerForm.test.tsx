@@ -91,7 +91,7 @@ describe("CustomerForm", () => {
       );
 
       await ReactTestUtils.Simulate.change(field(fieldName)!, {
-        target: { value } as HTMLInputElement,
+        target: { name: fieldName, value } as HTMLInputElement,
       });
 
       await ReactTestUtils.Simulate.submit(form("customer")!);

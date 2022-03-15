@@ -1,36 +1,26 @@
 import React, { useState } from "react";
+import { CustomerData } from "./types";
 
 type CustomerFormProps = {
   firstName?: string;
   lastName?: string;
   phoneNumber?: string;
-  onSubmit?: ({ firstName }: { firstName?: string }) => void;
+  onSubmit?: (customer: CustomerData) => void;
 };
 export const CustomerForm: React.FC<CustomerFormProps> = ({
-  firstName,
-  lastName,
-  phoneNumber,
+  firstName = "",
+  lastName = "",
+  phoneNumber = "",
   onSubmit,
 }) => {
-  const [customer, setCustomer] = useState({
+  const [customer, setCustomer] = useState<CustomerData>({
     firstName,
     lastName,
     phoneNumber,
   });
-  const handleChangeFirstName = ({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    setCustomer((prev) => ({ ...prev, firstName: target.value }));
-  };
-  const handleChangeLastName = ({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    setCustomer((prev) => ({ ...prev, lastName: target.value }));
-  };
-  const handleChangePhoneNumber = ({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    setCustomer((prev) => ({ ...prev, phoneNumber: target.value }));
+
+  const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    setCustomer((c) => ({ ...c, [target.name]: target.value }));
   };
   return (
     <form id="customer" onSubmit={() => onSubmit && onSubmit(customer)}>
@@ -39,7 +29,7 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
         id="firstName"
         name="firstName"
         type="text"
-        onChange={handleChangeFirstName}
+        onChange={handleChange}
         value={firstName}
       />
       <label htmlFor="lastName">Last Name</label>
@@ -48,7 +38,7 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
         name="lastName"
         type="text"
         value={lastName}
-        onChange={handleChangeLastName}
+        onChange={handleChange}
       />
       <label htmlFor="phoneNumber">Phone Number</label>
 
@@ -56,7 +46,7 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
         id="phoneNumber"
         name="phoneNumber"
         value={phoneNumber}
-        onChange={handleChangePhoneNumber}
+        onChange={handleChange}
       ></input>
     </form>
   );
