@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { CustomerData } from "./types";
 
+type FieldNames = "firstName" | "lastName" | "phoneNumber";
+
 type CustomerFormProps = {
   firstName?: string;
   lastName?: string;
@@ -19,25 +21,29 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
     phoneNumber,
   });
 
-  const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = ({  target }: React.ChangeEvent<HTMLInputElement>) => {
     setCustomer((c) => ({ ...c, [target.name]: target.value }));
   };
+  
   return (
-    <form id="customer" onSubmit={() => onSubmit && onSubmit(customer)}>
+    <form
+      id="customer"
+      onSubmit={() => onSubmit && onSubmit(customer)}
+    >
       <label htmlFor="firstName">First Name</label>
       <input
         id="firstName"
         name="firstName"
         type="text"
         onChange={handleChange}
-        value={firstName}
+        value={customer.firstName}
       />
       <label htmlFor="lastName">Last Name</label>
       <input
         id="lastName"
         name="lastName"
         type="text"
-        value={lastName}
+        value={customer.lastName}
         onChange={handleChange}
       />
       <label htmlFor="phoneNumber">Phone Number</label>
@@ -45,9 +51,11 @@ export const CustomerForm: React.FC<CustomerFormProps> = ({
       <input
         id="phoneNumber"
         name="phoneNumber"
-        value={phoneNumber}
+        type="text"
+        value={customer.phoneNumber}
         onChange={handleChange}
-      ></input>
+      />
+      <input type="submit" value="Add" />
     </form>
   );
 };

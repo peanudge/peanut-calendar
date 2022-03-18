@@ -1,0 +1,19 @@
+#customer {
+  display: flex;
+  flex-direction: column;
+  max-width: 50%;
+  justify-content: center;
+  margin: auto;
+}
+
+#customer label {
+  margin-bottom: 5px;
+}
+
+#customer input {
+  margin-bottom: 5px;
+}
+
+#customer input[type="submit"] {
+  margin-top: 10px;
+}
