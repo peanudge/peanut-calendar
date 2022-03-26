@@ -7,8 +7,13 @@ export type AppointmentData = {
   service?: string;
   notes?: string;
 };
+
 export type CustomerData = {
   firstName: string;
   lastName?: string;
   phoneNumber?: string;
 };
+
+export type AppointmentFormData = {
+  service?: string;
+}

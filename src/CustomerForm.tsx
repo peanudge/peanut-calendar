@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { CustomerData } from "./types";
 
-type FieldNames = "firstName" | "lastName" | "phoneNumber";
-
 type CustomerFormProps = {
   firstName?: string;
   lastName?: string;
